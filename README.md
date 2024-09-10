@@ -258,6 +258,24 @@ host 정보 설정 필요
  kubectl apply -f ./yaml/kubeflow-ingress.yaml
 ```
 
+## 11. Profile 설정
+
+```
+생성
+
+조회
+kubectl get profiles
+kubectl describe profile MY_PROFILE_NAME
+
+예) kubectl describe profile kubeflow-user-example-com
+
+수정
+
+삭제
+kubectl delete profile MY_PROFILE_NAME
+예) kubectl delete profile kubeflow-user-example-com
+```
+
 ## 참고
 ```
 https://github.com/kubeflow/manifests/tree/v1.9-branch#installation
