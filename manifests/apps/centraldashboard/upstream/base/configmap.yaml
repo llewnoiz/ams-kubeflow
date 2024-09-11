@@ -67,7 +67,14 @@ data:
                 ],
                 "text": "Pipelines",
                 "type": "section"
+            },
+            {
+                "icon": "",
+                "link": "/volumes/",
+                "text": "Manage Account",
+                "type": "item"
             }
+            
         ],
         "externalLinks": [],
         "documentationItems": [

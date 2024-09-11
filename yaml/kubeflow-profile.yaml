@@ -1,0 +1,15 @@
+apiVersion: kubeflow.org/v1beta1
+kind: Profile
+metadata:
+  name: root # namespace
+spec:
+  owner:
+    kind: User
+    name: hyunmin.song@bespinglobal.com
+  resourceQuotaSpec:
+    hard:
+      cpu: "6"
+      memory: "16Gi"
+      requests.nvidia.com/gpu: "1"
+      persistentvolumeclaims: "10"
+      requests.storage: "100Gi"
