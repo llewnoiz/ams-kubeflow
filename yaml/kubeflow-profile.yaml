@@ -1,7 +1,7 @@
 apiVersion: kubeflow.org/v1beta1
 kind: Profile
 metadata:
-  name: root # namespace
+  name: hyunmin.song # namespace
 spec:
   owner:
     kind: User

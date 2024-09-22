@@ -1,5 +1,10 @@
-source ./env.sh
-# vpc_id=$(aws eks describe-cluster --name $AWS_EKS_CLUSTER --query "cluster.resourcesVpcConfig.vpcId" --output text)
+AWS_REGION=ap-northeast-2
+AWS_EKS_CLUSTER=ams-eks-kf-cluster
+AWS_ACCOUNT_ID=975050192123
+AWS_VPC_ID=vpc-0ffef1cc7827d826e
+AWS_SG_KF_NAME=ams-sg-kf
+AWS_SG_KF_ID=
+AWS_EFS_FS_ID=fs-094dbf1028e178918
 
 echo "VPC_ID : $AWS_VPC_ID"
 echo "EKS_CLUSTER_ID : $AWS_EKS_CLUSTER"
@@ -7,11 +12,7 @@ echo "AWS_REGION : $AWS_REGION"
 echo "AWS_SG_KF_NAME: ${AWS_SG_KF_NAME}"
 
 
-cidr_range=$(aws ec2 describe-vpcs \
---vpc-ids $AWS_VPC_ID \
---query "Vpcs[].CidrBlock" \
---output text \
---region $AWS_REGION)
+cidr_range=$(aws ec2 describe-vpcs --vpc-ids $AWS_VPC_ID --query "Vpcs[].CidrBlock" --output text --region $AWS_REGION)
 
 echo "cidr_range: ${cidr_range}"
 

@@ -12,7 +12,7 @@ spec:
   storageClassName: efs-sc
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: fs-0dd01eeef3ddcaabb
+    volumeHandle: fs-094dbf1028e178918
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -33,7 +33,7 @@ metadata:
 provisioner: efs.csi.aws.com
 parameters:
   provisioningMode: efs-ap
-  fileSystemId: fs-0dd01eeef3ddcaabb
+  fileSystemId: fs-094dbf1028e178918
   directoryPerms: "700"
   gidRangeStart: "1000"
   gidRangeEnd: "2000"

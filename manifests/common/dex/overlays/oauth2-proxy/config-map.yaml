@@ -22,6 +22,22 @@ data:
       hashFromEnv: DEX_USER_PASSWORD
       username: user
       userID: "15841185641784"
+    - email: hyunmin.song@bespinglobal.com
+      hashFromEnv: DEX_USER_PASSWORD
+      username: hyunmin.song
+      userID: "hyunmin.song"
+    - email: jaehyun.yang@bespinglobal.com
+      hashFromEnv: DEX_USER_PASSWORD
+      username: jaehyun.yang
+      userID: "jaehyun.yang"
+    - email: youngki.yoon@bespinglobal.com
+      hashFromEnv: DEX_USER_PASSWORD
+      username: youngki.yoon
+      userID: "youngki.yoon"
+    - email: kwangjin.hwang@bespinglobal.com
+      hashFromEnv: DEX_USER_PASSWORD
+      username: kwangjin.hwang
+      userID: "kwangjin.hwang"
     staticClients:
     # https://github.com/dexidp/dex/pull/1664
     - idEnv: OIDC_CLIENT_ID

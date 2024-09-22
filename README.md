@@ -169,7 +169,7 @@ eksctl get iamserviceaccount --cluster $AWS_EKS_CLUSTER
 
 설치
 eksctl create addon --name aws-ebs-csi-driver\
- --cluster ${CLUSTER_NAME}\
+ --cluster ${AWS_EKS_CLUSTER}\
  --service-account-role-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmazonEKS_EBS_CSI_DriverRole\
  --force
 
@@ -260,6 +260,15 @@ host 정보 설정 필요
 
 ## 11. Profile 설정
 
+자동생성 (기본)
+
+```
+manifests\common\dex\overlays\oauth2-proxy\config-map.yaml 에 사용자 설정
+kubectl delete deployments.app dex -n auth
+kustomize build common/dex/overlays/oauth2-proxy | kubectl apply -f -
+```
+
+수동 
 ```
 생성
 
@@ -276,6 +285,10 @@ kubectl delete profile MY_PROFILE_NAME
 예) kubectl delete profile kubeflow-user-example-com
 ```
 
+# 12 AutoScaler 
+```
+
+```
 ## 참고
 ```
 https://github.com/kubeflow/manifests/tree/v1.9-branch#installation
