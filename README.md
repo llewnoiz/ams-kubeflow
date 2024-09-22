@@ -288,6 +288,43 @@ kubectl delete profile MY_PROFILE_NAME
 # 12 AutoScaler 
 ```
 
+aws iam create-policy --policy-name EKSClusterAutoscalerPolicy --policy-document file://cluster-autoscaler-policy.json
+
+eksctl create iamserviceaccount \
+    --name cluster-autoscaler \
+    --namespace kube-system \
+    --cluster $AWS_EKS_CLUSTER \
+    --attach-policy-arn arn:aws:iam::$AWS_ACCOUNT_ID:policy/EKSClusterAutoscalerPolicy \
+    --approve \
+    --override-existing-serviceaccounts
+
+eksctl get iamserviceaccount --cluster $AWS_EKS_CLUSTER
+
+helm repo add autoscaler https://kubernetes.github.io/autoscaler
+helm repo update
+
+helm install cluster-autoscaler \
+    --namespace kube-system \
+    --set autoDiscovery.clusterName=$AWS_EKS_CLUSTER \
+    --set awsRegion=$AWS_REGION \
+    --set rbac.serviceAccount.create=false \
+    --set rbac.serviceAccount.name=cluster-autoscaler \
+    autoscaler/cluster-autoscaler
+
+
+kubectl get pod -n kube-system -l "app.kubernetes.io/name=aws-cluster-autoscaler,app.kubernetes.io/instance=cluster-autoscaler"
+
+--nodegroup-name 확인
+aws eks list-nodegroups --cluster-name $AWS_EKS_CLUSTER
+
+ResourceId 확인
+aws eks describe-nodegroup --cluster-name $AWS_EKS_CLUSTER --nodegroup-name linux-nodes
+
+설정
+aws autoscaling create-or-update-tags --tags "ResourceId=eks-linux-nodes-e2c90d61-c979-13cf-aaca-ca10746506ef,ResourceType=auto-scaling-group,Key=k8s.io/cluster-autoscaler/enabled,Value=true,PropagateAtLaunch=true" \
+                                      "ResourceId=eks-linux-nodes-e2c90d61-c979-13cf-aaca-ca10746506ef,ResourceType=auto-scaling-group,Key=kubernetes.io/cluster/$AWS_EKS_CLUSTER,Value=owned,PropagateAtLaunch=true"
+
+
 ```
 ## 참고
 ```
